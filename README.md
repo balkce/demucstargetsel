@@ -1,9 +1,17 @@
 # Target Selection Strategies for Demucs-Denoiser
 Embedding- and location-based target selection strategies for the Demucs-Denoiser speech enhancement technique.
 
+## To clone:
+
+Before doing `git clone`, you'll need GIT LFS:
+
+    curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+    sudo apt-get install git-lfs
+    git lfs install
+
 ## Requirements
 
-Install the requirements:
+To install the requirements:
 
     pip install -r requirements.txt
 
@@ -11,13 +19,9 @@ Install the requirements:
 
 We'll assume that the folder in which you have downloaded this repository is `/opt/demucstargetsel`.
 
-The to-be-created dataset is based on the 2020 branch of the [Interspeech Deep Noise Suppression (DNS) Challenge](https://github.com/microsoft/DNS-Challenge). An important requirement to download the original DNS dataset is GIT LFS:
+The to-be-created dataset is based on the 2020 branch of the [Interspeech Deep Noise Suppression (DNS) Challenge](https://github.com/microsoft/DNS-Challenge). This repository also requires GIT LFS.
 
-    curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
-    sudo apt-get install git-lfs
-    git lfs install
-
-Once installed, change directory to where you desire to have the base DNS code. We'll assume that is located in `/opt/DNS`:
+Once cloned, change directory to where you desire to have the base DNS code. We'll assume that is located in `/opt/DNS`:
 
     cd /opt/DNS
     git clone --branch interspeech2020/master https://github.com/microsoft/DNS-Challenge
