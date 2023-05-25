@@ -1,0 +1,8 @@
+dset:
+  train: egs/dns/train_full.json
+  valid: egs/dns/valid_full.json
+  test: egs/dns/test.json
+  db_json: egs/dns/test.json
+  noisy_dir:
+pesq: 1
+
