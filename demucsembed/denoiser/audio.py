@@ -38,12 +38,15 @@ def get_clean_path(path):
     info_file = open(info_file_path,"r")
     clean_path = info_file.readline().rstrip() #first line in txt file is the clean WAV file
     embed_path = info_file.readline().rstrip() #second line in txt file is the embed WAV file
+    interf_path = info_file.readline().rstrip() #third line in txt file is the interf WAV file (ignored for this strategy)
+    mic_path = info_file.readline().rstrip() #fourth line in txt file is the mic WAV file
     info_file.close()
     
     assert os.path.exists(clean_path), clean_path+"does not exist."
     assert os.path.exists(embed_path), embed_path+"does not exist."
+    assert os.path.exists(mic_path), mic_path+"does not exist."
     
-    return clean_path, embed_path
+    return clean_path, embed_path, mic_path
 
 def get_info(path):
     info = torchaudio.info(path)
@@ -66,11 +69,11 @@ def find_audio_files(path, exts=[".wav"], progress=True):
     
     for idx, file in enumerate(audio_files):
         info = get_info(file)
-        clean_audio_path, embed_audio_path = get_clean_path(file)
+        clean_audio_path, embed_audio_path, mic_audio_path = get_clean_path(file)
         info_clean = get_info(clean_audio_path)
         
         this_length = min(info.length,info_clean.length)
-        meta.append((file, clean_audio_path, embed_audio_path, this_length))
+        meta.append((mic_audio_path, clean_audio_path, embed_audio_path, this_length))
         if progress:
             print(format((1 + idx) / len(audio_files), " 3.1%"), end='\r')
     if progress:
