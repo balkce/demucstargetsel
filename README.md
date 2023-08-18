@@ -1,5 +1,5 @@
 # Target Selection Strategies for Demucs-Denoiser
-Embedding- and location-based target selection strategies for the Demucs-Denoiser speech enhancement technique.
+Embedding- and location-based target selection strategies for the Demucs-Denoiser speech enhancement technique: [paper](https://www.mdpi.com/2076-3417/13/13/7820).
 
 ## To clone:
 
@@ -112,4 +112,21 @@ Copy the trained models to their respective folder inside `evaluation/pretrained
 
     python SEEval_DNSMultiMic_script.py
 
+## Citation
 
+If you use this code, please cite the following to provide credit:
+
+```BibTex
+@Article{rascon2023appliedsciences,
+   AUTHOR = {Rascon, Caleb and Fuentes-Pineda, Gibran},
+   TITLE = {Target Selection Strategies for Demucs-Based Speech Enhancement},
+   JOURNAL = {Applied Sciences},
+   VOLUME = {13},
+   YEAR = {2023},
+   NUMBER = {13},
+   ARTICLE-NUMBER = {7820},
+   URL = {https://www.mdpi.com/2076-3417/13/13/7820},
+   ISSN = {2076-3417},
+   DOI = {10.3390/app13137820}
+}
+```
