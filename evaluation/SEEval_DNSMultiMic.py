@@ -19,7 +19,7 @@ from speechbrain.pretrained import EncoderClassifier
 embedding_extractor = EncoderClassifier.from_hparams(source="speechbrain/spkrec-ecapa-voxceleb")
 
 class SEEval():
-  dir_path=""
+  store_wav=False
   results_dict = {
     "wav_id": "",
     "babble_snr": 0.0,
@@ -78,8 +78,8 @@ class SEEval():
         model = self.deserialize_model(pkg)
     return model
   
-  def __init__(self, path=""):
-    self.dir_path = path
+  def __init__(self, store_wav=False):
+    self.store_wav = store_wav
   
   def load_model(self, model_number):
     self.curr_model["id"] = model_number
@@ -199,9 +199,15 @@ class SEEval():
     
     estimations[0,:] = win_result[:,:result_len].squeeze(0).detach()
     
-    #sb.dataio.dataio.write_audio("seeval-clean.wav",references[0,:],16000)
-    #sb.dataio.dataio.write_audio("seeval-result.wav",estimations[0,:],16000)
-    #sb.dataio.dataio.write_audio("seeval-noisy.wav",noisy[0,:],16000)
+    if self.store_wav:
+      sb.dataio.dataio.write_audio("results/"+self.results_dict["wav_id"]+"-clean.wav",references[0,:],16000)
+      sb.dataio.dataio.write_audio("results/"+self.results_dict["wav_id"]+"-result.wav",estimations[0,:],16000)
+      if self.curr_model["type"] == "phase":
+        sb.dataio.dataio.write_audio("results/"+self.results_dict["wav_id"]+"-bf.wav",noisy[0,:],16000)
+        shutil.copyfile(str(int_paths[3].rstrip()), "results/"+self.results_dict["wav_id"]+"-mic.wav")
+      else:
+        sb.dataio.dataio.write_audio("results/"+self.results_dict["wav_id"]+"-mic.wav",noisy[0,:],16000)
+    
     (sdr, sir, sar, perm) = mir_eval.separation.bss_eval_sources(references.numpy(), estimations.numpy())
     self.results_dict["SIR"] = sdr[0].item()
     
@@ -257,7 +263,7 @@ else:
   eval_results_file.write("model,wav_id,reverb_scale,babble_num,babble_snr,noise_snr,window_size,response_time,SIR,mem\n")
   eval_results_file.close()
 
-seeval = SEEval(".")
+seeval = SEEval(store_wav=False)
 
 this_process = psutil.Process(os.getpid())
 

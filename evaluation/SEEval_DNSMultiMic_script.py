@@ -14,7 +14,7 @@ eval_window_size = [0]
 
 paths_num = file_len("dataset_wavs_DNSMultiMic.txt")
 
-corpus_path = "/home/ar/databases/DNS/DNS-Challenge/corpus_multimic/noisy"
+corpus_path = "/opt/DNS/DNS-Challenge/corpus_multimic/noisy"
 
 if os.path.exists("curr_dataset_wav.txt"):
   curr_path_file = open("curr_dataset_wav.txt","r")
