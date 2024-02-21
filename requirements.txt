@@ -1,3 +1,4 @@
+wheel
 pyannote.audio
 hydra_core
 hydra_colorlog
