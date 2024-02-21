@@ -1,6 +1,10 @@
 # Target Selection Strategies for Demucs-Denoiser
 Embedding- and location-based target selection strategies for the Demucs-Denoiser speech enhancement technique: [paper](https://www.mdpi.com/2076-3417/13/13/7820).
 
+## Some dependencies before starting:
+
+sudo apt install nvidia-cuda-toolkit build-essential python3-dev
+
 ## To clone:
 
 Before doing `git clone`, you'll need GIT LFS:
