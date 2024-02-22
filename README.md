@@ -127,7 +127,11 @@ Change to the repositories `evaluation` directory:
 
     cd evaluation
 
-Modify the `create_dataset_wavs_DNSMultiMic.py` to point to where the created dataset resides and run:
+Since the evaluation scripts use the base "denoiser" package to compare to the original model, the base package needs to be installed. However, be aware that the original "denoiser" implementation creates some version conflicts with the training code in this repository. Thus, it is recommended to install the "denoiser" package after training has been completed, or in another copy of this repository with a different python environment, so as to not have any versioning conflicts:
+
+    pip install denoiser
+
+Then, modify the `create_dataset_wavs_DNSMultiMic.py` to point to where the created dataset resides and run:
 
     python create_dataset_wavs_DNSMultiMic.py
 
