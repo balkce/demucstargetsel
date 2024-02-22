@@ -13,18 +13,17 @@ python train.py \
   bandmask=0.2 \
   shift=8000 \
   shift_same=True \
+  revecho=1 \
   noise_normalize=True \
   stft_loss=True \
   stft_sc_factor=0.1 stft_mag_factor=0.1 \
   segment=4.5 \
-  acoustic_loss=False \
-  acoustic_loss_only=False \
-  ac_loss_weight=1 \
   stft_loss_weight=0.3 \
   stride=0.5 \
   epochs=200 \
   dummy=demucsphase64 \
   num_prints=75 \
   batch_size=32 \
-  eval_every=1
+  eval_every=1 \
+  ddp=1
 

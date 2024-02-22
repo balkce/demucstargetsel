@@ -232,7 +232,6 @@ class Solver(object):
     def _run_one_epoch(self, epoch, cross_valid=False):
         total_loss = 0
         total_enhancement_loss = 0
-        total_acoustic_loss  = 0
         data_loader = self.tr_loader if not cross_valid else self.cv_loader
 
         # get a different order for distributed training, otherwise this will get ignored

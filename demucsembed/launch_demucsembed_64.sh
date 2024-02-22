@@ -10,10 +10,10 @@ python train.py \
   demucs.causal=1 \
   demucs.hidden=64 \
   demucs.resample=4 \
-  revecho=1 \
   bandmask=0.2 \
   shift=8000 \
   shift_same=True \
+  revecho=1 \
   noise_normalize=True \
   stft_loss=True \
   stft_sc_factor=0.1 stft_mag_factor=0.1 \
@@ -21,7 +21,7 @@ python train.py \
   stft_loss_weight=0.3 \
   stride=0.5 \
   epochs=200 \
-  dummy=embeddemucsdnsfull64 \
+  dummy=demucsembed64 \
   num_prints=75 \
   batch_size=32 \
   eval_every=1 \
