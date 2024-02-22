@@ -66,9 +66,13 @@ Change to the `demucsembed` folder in the repository. Change the `make_dns_multi
 
     bash make_dns_multiuser.sh
 
-Once finished, to train run:
+Once finished, this will create two sets of training configuration: a small one defined as "dns", and a complete one defined as "dns_full".
+
+To train run:
 
     bash launch_embeddemucs_dns-multiuser_full64.sh
+
+This will by default will use the "dns_full" configuration, but can be changed by modifying the "dset" parameter.
 
 The model will be stored in `outputs/exp_dummy:embeddemucsdnsfull64/best.th`.
 
@@ -78,9 +82,13 @@ Change to the `demucsphasebeamform` folder in the repository. Change the `make_d
 
     bash make_dns_multimic.sh
 
-Once finished, to train run:
+Once finished, this will create two sets of training configuration: a small one defined as "dns", and a complete one defined as "dns_full".
+
+To train run:
 
     bash launch_demucsphase_64.sh
+
+This will by default will use the "dns_full" configuration, but can be changed by modifying the "dset" parameter.
 
 The model will be stored in `outputs/exp_dummy:demucsphase64/best.th`.
 
