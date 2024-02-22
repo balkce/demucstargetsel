@@ -6,7 +6,7 @@
 # LICENSE file in the root directory of this source tree.
 # authors: adiyoss, adefossez, balkce
 
-dnspath=/opt/DNS/DNS-Challenge
+dnspath=/home/ar/Data/databases/DNS/DNS-Challenge
 
 path=egs/dns
 if [[ ! -e $path ]]; then

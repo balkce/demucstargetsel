@@ -20,7 +20,7 @@ def build_userinfo(user_info_json,full_json):
   logger.info("\t Full json length:           "+str(full_jsons_len))
   
   logger.info("\t Extracting users from full json...")
-  wav_files = [j[0] for j in full_jsons]
+  wav_files = [j[2] for j in full_jsons]
   users = []
   for wav_path in wav_files:
     if "silence" in wav_path:
@@ -39,9 +39,9 @@ def build_userinfo(user_info_json,full_json):
   mini_jsons = []
   for user in users:
     if user == "silence":
-      user_jsons = [json for json in full_jsons if "silence" in json[0]]
+      user_jsons = [json for json in full_jsons if "silence" in json[2]]
     else:
-      user_jsons = [json for json in full_jsons if "reader_"+user in json[0]]
+      user_jsons = [json for json in full_jsons if "reader_"+user in json[2]]
     user_dic[user] = user_jsons
   logger.info("\t\t done.")
   

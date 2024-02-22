@@ -6,10 +6,6 @@ import glob
 
 import hydra
 
-silence_path = "/home/ar/EmbedSS/denoiser/dataset/silence.wav"
-clean_dir = "/home/ar/databases/DNS/DNS-Challenge/datasets/clean"
-clean_wav_files = glob.glob(os.path.join(clean_dir,"*.wav"))
-
 logger = logging.getLogger(__name__)
 
 def get_users(path,user):
@@ -60,38 +56,8 @@ def build_mini_json(mini_json,full_json,user_json,k=1):
   for user in users:
     user_jsons = user_dic[user]
     thisuser_jsons = random.choices(user_jsons,k=k)
-    
-    #switching embedding from another clean wav from same user
-    #thisuser_json = random.choice(user_jsons)
-    #thisuser_recid = thisuser_json[0].split("reader_"+user+"_")[1].split("_")[0]
-    #thisuser_clean_wav_files = [wav for wav in clean_wav_files if "reader_"+user in wav]
-    #newembed_wav_file = random.choice(thisuser_clean_wav_files)
-    #newembed_recid = newembed_wav_file.split("reader_"+user+"_")[1].split(".wav")[0]
-    #while newembed_recid == thisuser_recid:
-    #    newembed_wav_file = random.choice(thisuser_clean_wav_files)
-    #    newembed_recid = newembed_wav_file.split("reader_"+user+"_")[1].split(".wav")[0]
-    #thisuser_json[2] = newembed_wav_file
-    
     mini_jsons += thisuser_jsons
   logger.info("\t\t done.")
-  
-  #logger.info("\t Adding some silence examples...")
-  #sil_num = int(len(users)*0.2)
-  #sil_users = random.choices(users, k = sil_num)
-  #for user in sil_users:
-  #  user_jsons = [json for json in full_jsons if "reader_"+user in json[0]]
-  #  thisuser_json = random.choice(user_jsons)
-  #  thisuser_users = get_users(thisuser_json[0],user)
-  #  new_userembed = random.choice(users)
-  #  while new_userembed in thisuser_users:
-  #      new_userembed = random.choice(users)
-  #  new_userembed_clean_wav_files = [wav for wav in clean_wav_files if "reader_"+new_userembed in wav]
-  #  new_userembed_wav_file = random.choice(new_userembed_clean_wav_files)
-  #  
-  #  thisuser_json[1] = silence_path
-  #  thisuser_json[2] = new_userembed_wav_file
-  #  mini_jsons.append(thisuser_json)
-  #logger.info("\t\t done.")
   
   logger.info("\t Mini json length:       "+str(len(mini_jsons)))
   
