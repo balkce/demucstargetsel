@@ -72,7 +72,7 @@ To train run:
 
     bash launch_embeddemucs_dns-multiuser_full64.sh
 
-This will by default will use the "dns_full" configuration, but can be changed by modifying the "dset" parameter.
+This by default will use the "dns_full" configuration, but can be changed by modifying the "dset" parameter.
 
 The model will be stored in `outputs/exp_dummy:embeddemucsdnsfull64/best.th`.
 
@@ -88,7 +88,7 @@ To train run:
 
     bash launch_demucsphase_64.sh
 
-This will by default will use the "dns_full" configuration, but can be changed by modifying the "dset" parameter.
+This by default will use the "dns_full" configuration, but can be changed by modifying the "dset" parameter.
 
 The model will be stored in `outputs/exp_dummy:demucsphase64/best.th`.
 
