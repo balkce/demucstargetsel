@@ -11,7 +11,6 @@ sounddevice
 torchaudio
 torch
 speechbrain
-denoiser
 mir_eval
 pytorch-minimize
 pyroomacoustics
