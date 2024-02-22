@@ -1,13 +1,30 @@
 # Target Selection Strategies for Demucs-Denoiser
 Embedding- and location-based target selection strategies for the Demucs-Denoiser speech enhancement technique: [paper](https://www.mdpi.com/2076-3417/13/13/7820).
 
+## Some packages to install before starting:
+
+sudo apt install nvidia-cuda-toolkit build-essential python3-dev python3-venv
+
 ## To clone:
 
-Before doing `git clone`, you'll need GIT LFS:
+Before doing cloning this repository, you'll need GIT LFS:
+
+    sudo apt install git-lfs
+    git lfs install
+
+If your version of Ubuntu/Debian doesn't have the `git-lfs` package, install the following repository:
 
     curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
-    sudo apt-get install git-lfs
-    git lfs install
+
+Then you can clone this repository by doing `git clone <url of this repository>`
+
+We'll assume that the folder in which you cloned this repository is `/opt/demucstargetsel`.
+
+After cloning, it's a good idea to create a python environment:
+
+    cd /opt/demucstargetsel
+    python -m venv .
+    source  bin/activate
 
 ## Requirements
 
@@ -17,11 +34,9 @@ To install the requirements:
 
 ## Creating the Training/Validation/Testing Dataset
 
-We'll assume that the folder in which you have downloaded this repository is `/opt/demucstargetsel`.
-
 The to-be-created dataset is based on the 2020 branch of the [Interspeech Deep Noise Suppression (DNS) Challenge](https://github.com/microsoft/DNS-Challenge). This repository also requires GIT LFS.
 
-Once cloned, change directory to where you desire to have the base DNS code. We'll assume that is located in `/opt/DNS`:
+To clone the dataset repository, change directory to where you desire to have the base DNS code. We'll assume that is located in `/opt/DNS`:
 
     cd /opt/DNS
     git clone --branch interspeech2020/master https://github.com/microsoft/DNS-Challenge
@@ -29,7 +44,7 @@ Once cloned, change directory to where you desire to have the base DNS code. We'
     git lfs track "*.wav"
     git add .gitattributes
 
-Then copy all the files in the repositories `datasetcreation` folder to `/opt/DNS`:
+Then copy all the files in the `datasetcreation` folder to `/opt/DNS`:
 
     cp /opt/demucstargetsel/datasetcreation/* .
 
@@ -51,9 +66,13 @@ Change to the `demucsembed` folder in the repository. Change the `make_dns_multi
 
     bash make_dns_multiuser.sh
 
-Once finished, to train run:
+Once finished, this will create two sets of training configuration: a small one defined as "dns", and a complete one defined as "dns_full".
+
+To train run:
 
     bash launch_embeddemucs_dns-multiuser_full64.sh
+
+This by default will use the "dns_full" configuration, but can be changed by modifying the "dset" parameter.
 
 The model will be stored in `outputs/exp_dummy:embeddemucsdnsfull64/best.th`.
 
@@ -63,9 +82,13 @@ Change to the `demucsphasebeamform` folder in the repository. Change the `make_d
 
     bash make_dns_multimic.sh
 
-Once finished, to train run:
+Once finished, this will create two sets of training configuration: a small one defined as "dns", and a complete one defined as "dns_full".
+
+To train run:
 
     bash launch_demucsphase_64.sh
+
+This by default will use the "dns_full" configuration, but can be changed by modifying the "dset" parameter.
 
 The model will be stored in `outputs/exp_dummy:demucsphase64/best.th`.
 
@@ -104,7 +127,11 @@ Change to the repositories `evaluation` directory:
 
     cd evaluation
 
-Modify the `create_dataset_wavs_DNSMultiMic.py` to point to where the created dataset resides and run:
+Since the evaluation scripts use the base "denoiser" package to compare to the original model, the base package needs to be installed. However, be aware that the original "denoiser" implementation creates some version conflicts with the training code in this repository. Thus, it is recommended to install the "denoiser" package after training has been completed, or in another copy of this repository with a different python environment, so as to not have any versioning conflicts:
+
+    pip install denoiser
+
+Then, modify the `create_dataset_wavs_DNSMultiMic.py` to point to where the created dataset resides and run:
 
     python create_dataset_wavs_DNSMultiMic.py
 

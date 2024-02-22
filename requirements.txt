@@ -1,3 +1,4 @@
+wheel
 pyannote.audio
 hydra_core
 hydra_colorlog
@@ -10,6 +11,6 @@ sounddevice
 torchaudio
 torch
 speechbrain
-denoiser
 mir_eval
 pytorch-minimize
+pyroomacoustics
