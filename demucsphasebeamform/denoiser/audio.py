@@ -164,7 +164,7 @@ class Audioset:
                                       frame_offset=offset,
                                       num_frames=num_frames or -1)
         else:
-            out, sr = torchaudio.load(str(audio_path), offset=offset, num_frames=num_frames)
+            out, sr = torchaudio.load(str(audio_path), frame_offset=offset, num_frames=num_frames)
         target_sr = self.sample_rate or sr
         target_channels = self.channels or out.shape[0]
         if self.convert:

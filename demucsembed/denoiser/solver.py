@@ -283,19 +283,20 @@ class Solver(object):
             with torch.autograd.set_detect_anomaly(True):
                 with autocast(enabled=self.use_amp):
                     if self.args.loss == 'l1':
-                        enh_loss = F.l1_loss(clean, estimate)
+                        loss = F.l1_loss(clean, estimate)
                     elif self.args.loss == 'l2':
-                        enh_loss = F.mse_loss(clean, estimate)
+                        loss = F.mse_loss(clean, estimate)
                     elif self.args.loss == 'huber':
-                        enh_loss = F.smooth_l1_loss(clean, estimate)
+                        loss = F.smooth_l1_loss(clean, estimate)
                     else:
                         raise ValueError(f"Invalid loss {self.args.loss}")
                     # MultiResolution STFT loss
                     if self.args.stft_loss:
                         sc_loss, mag_loss = self.mrstftloss(estimate.squeeze(1), clean.squeeze(1))
-                        enh_loss += self.args.stft_loss_weight * (sc_loss + mag_loss)
+                        enh_loss = self.args.stft_loss_weight * (sc_loss + mag_loss)
+                        loss += enh_loss
                     else:
-                        loss = enh_loss
+                        enh_loss = torch.Tensor([0]).to(device='cuda')
 
                 # optimize model in training mode
                 if not cross_valid:

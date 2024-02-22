@@ -18,7 +18,6 @@ python train.py \
   stft_loss=True \
   stft_sc_factor=0.1 stft_mag_factor=0.1 \
   segment=4.5 \
-  paap=False \
   stft_loss_weight=0.3 \
   stride=0.5 \
   epochs=200 \

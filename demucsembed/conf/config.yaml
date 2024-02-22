@@ -64,8 +64,6 @@ epochs: 500
 batch_size: 64
 gradient_clip: True
 grad_max_norm: 0.01
-paap: False # Use paap or not
-paap_weight_path: # path to paap weights .npy file
 use_amp: true
 epochs_to_run: None
 

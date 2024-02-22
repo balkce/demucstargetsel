@@ -5,7 +5,6 @@
 # LICENSE file in the root directory of this source tree.
 # authors: adiyoss, adefossez and balkce
 
-#run the model 1 epochs of each user sub-set
 python train.py \
   dset=dns_full \
   demucs.causal=1 \
@@ -18,7 +17,6 @@ python train.py \
   stft_loss=True \
   stft_sc_factor=0.1 stft_mag_factor=0.1 \
   segment=4.5 \
-  paap=False \
   acoustic_loss=False \
   acoustic_loss_only=False \
   ac_loss_weight=1 \
