@@ -159,12 +159,11 @@ class Audioset:
         if self.length is not None:
             offset = self.stride * index
             num_frames = self.length
-        if torchaudio.get_audio_backend() in ['soundfile', 'sox_io']:
-            out, sr = torchaudio.load(str(audio_path),
-                                      frame_offset=offset,
-                                      num_frames=num_frames or -1)
-        else:
-            out, sr = torchaudio.load(str(audio_path), frame_offset=offset, num_frames=num_frames)
+        
+        out, sr = torchaudio.load(str(audio_path),
+                                  frame_offset=offset,
+                                  num_frames=num_frames or -1)
+        
         target_sr = self.sample_rate or sr
         target_channels = self.channels or out.shape[0]
         if self.convert:
