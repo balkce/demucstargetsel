@@ -19,11 +19,11 @@ class Remix(nn.Module):
     """
 
     def forward(self, sources):
-        noise, clean = sources
+        noise, clean, interf = sources
         bs, *other = noise.shape
         device = noise.device
         perm = th.argsort(th.rand(bs, device=device), dim=0)
-        return th.stack([noise[perm], clean])
+        return th.stack([noise[perm], clean, interf])
 
 
 class RevEcho(nn.Module):
@@ -113,7 +113,7 @@ class RevEcho(nn.Module):
     def forward(self, wav):
         if random.random() >= self.proba:
             return wav
-        noise, clean = wav
+        noise, clean, interf = wav
         # Sample characteristics for the reverb
         initial = random.random() * self.initial
         first_delay = random.uniform(*self.first_delay)
@@ -127,7 +127,7 @@ class RevEcho(nn.Module):
         clean += self.keep_clean * reverb_clean
         noise += (1 - self.keep_clean) * reverb_clean
 
-        return th.stack([noise, clean])
+        return th.stack([noise, clean, interf])
 
 
 class BandMask(nn.Module):
