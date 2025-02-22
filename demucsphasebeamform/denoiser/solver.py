@@ -14,7 +14,8 @@ import time
 
 import torch
 import torch.nn.functional as F
-from torch.cuda.amp import autocast
+#from torch.cuda.amp import autocast
+from torch.amp import autocast
 from torchmin import minimize
 
 from . import augment, distrib, pretrained
@@ -129,7 +130,7 @@ class Solver(object):
 
         if load_from:
             logger.info(f'Loading checkpoint model: {load_from}')
-            package = torch.load(load_from, 'cpu')
+            package = torch.load(load_from, 'cpu', weights_only=False)
             if load_best:
                 self.model.load_state_dict(package['best_state'])
             else:
@@ -265,7 +266,7 @@ class Solver(object):
             
             # apply a loss function after each layer
             with torch.autograd.set_detect_anomaly(True):
-                with autocast(enabled=self.use_amp):
+                with autocast('cuda',enabled=self.use_amp):
                     if self.args.loss == 'l1':
                         loss = F.l1_loss(clean, estimate)
                     elif self.args.loss == 'l2':
